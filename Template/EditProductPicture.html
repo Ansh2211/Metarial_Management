@@ -1,0 +1,81 @@
+<style type="text/css">
+    .root {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #dfe6e9;
+        padding: 20px;
+    }
+
+    .myframe {
+        width: 600px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .gap {
+        margin-top: 10px;
+    }
+
+    .btnstyle {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/javascript/project.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product Picture</title>
+</head>
+
+<body style="background-color: #dfe6e9;">
+    <form action="/saveeditproductpicture" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <input type="hidden" name="productid" value="{{row.0}}">
+        <input type="hidden" name="oldpicture" value="{{row.2}}">
+        <div class="root">
+            <div class="myframe">
+                <center>
+                    <div class="row"
+                        style="display: flex; align-items:center; justify-content: center; font-size:25px; letter-spacing:2px; font-weight:bold; padding-left : 20px; margin-bottom: 10px;">
+                        Edit Product Picture
+                    </div>
+                    <div class="row"
+                        style="display: flex; align-items:center; justify-content: center; font-size:20px; font-weight:bold;">
+                        {{row.1}}
+                    </div>
+
+
+                    <div>
+                        <img src="/static/{{row.2}}" width="30%" style="margin-top: 10px;">
+                    </div>
+                    <b> Select Image You Want to Replace </b>
+
+                    <div class="col btnstyle" style="flex-direction: row; margin-top: 10px;">
+                        <input type="file" id="picture" accept="image/*" name="picture" class="form-control"
+                            placeholder="Picture">
+                        &nbsp; <img src="/static/noimage.png" id="pic" width="50">
+                    </div>
+                    <div class="row gap">
+                        <div class="col btnstyle">
+                            <input type="submit" value="Save Image" class="btn btn-primary w-50">
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

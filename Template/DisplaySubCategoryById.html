@@ -1,0 +1,98 @@
+<style type="text/css">
+    .root {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #dfe6e9;
+        padding: 20px;
+    }
+
+    .myframe {
+        width: 600px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .gap {
+        margin-top: 10px;
+    }
+
+    .btnstyle{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="/static/javascript/category.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Material Management [Add Product SubCategory]</title>
+</head>
+
+<body style="background-color: #dfe6e9;">
+<form action="/editdeletesubcategoryrecord">
+    <input type="hidden" value="{{row.0}}" name="subcategoryid">
+    <div class="root">
+        <div class="myframe">
+            <div class="row"
+                style="display: flex; align-items:center; font-size:14px; letter-spacing:2px; font-weight:bold; padding-left : 20px; margin-bottom: 10px;">
+                <img src="/static/categoryicon.png" width="30" style="padding-right: 5px;">
+                Update SubCategory
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <select id="categoryid" name="categoryid" class="form-control" >
+                        <!-- <option value="{{row.5}}"></option> -->
+                        <option>{{row.5}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row gap">
+                <div class="col">
+                    <input type="text" value="{{row.2}}" name="subcategoryname" class="form-control" placeholder="SubCategory Name">
+                </div>
+            </div>
+
+            <div class="row gap">
+                <div class="col">
+                    <input type="text" value="{{row.3}}" name="description" class="form-control" placeholder="Description">
+                </div>
+
+                <div class="col btnstyle" style="flex-direction: row;">
+                    &nbsp; <img src="/static/{{row.4}}" id="pic" width="50">
+                </div>
+            </div>
+
+            <div class="row gap">
+                <div class="col btnstyle" >
+                    <button type="submit" name="btn" value="Edit" class="btn btn-primary" style="width: 100%;">Edit</button>
+                </div>
+
+                <div class="col btnstyle">
+                    <button type="submit" name="btn" value="Delete" class="btn btn-primary w-100" >Delete</button>
+                </div>
+            </div>
+
+            <div class="row gap">
+                <div class="col btnstyle" style="font-size: 18px; font-weight:bold;" >
+                    {{msg}}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

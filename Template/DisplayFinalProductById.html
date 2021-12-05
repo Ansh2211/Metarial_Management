@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/javascript/product.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+
+    <style type="text/css">
+        .root {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #dfe6e9;
+            padding: 20px;
+        }
+
+        .myframe {
+            width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .gap {
+            margin-top: 10px;
+        }
+
+        .btnstyle {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+    <title>Material Management [Add Products]</title>
+</head>
+
+<body style="background-color: #dfe6e9;">
+    <form action="/editdeletefinalproductrecord">
+        <input type="hidden" value="{{row.3}}" name="finalproductid">
+        <div class="root">
+            <div class="myframe">
+                <div class="row"
+                    style="display: flex; align-items:center; font-size:14px; letter-spacing:2px; font-weight:bold; padding-left : 20px; margin-bottom: 10px;">
+                    <img src="/static/product.png" width="30" style="padding-right: 5px;">
+                    Update Products
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <select id="categoryid" name="categoryid" class="form-control">
+                            <option value="{{row.0}}">{{row.13}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col">
+                        <select id="subcategoryid" name="subcategoryid" class="form-control">
+                            <option value="{{row.1}}">{{row.14}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col">
+                        <select id="productid" name="productid" class="form-control">
+                            <option value="{{row.2}}">{{row.15}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col">
+                        <input type="text" value="{{row.4}}" name="finalproductname" class="form-control"
+                            placeholder="Product Name">
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col">
+                        <input type="text" value="{{row.5}}" name="size" class="form-control" placeholder="Size">
+                    </div>
+
+                    <div class="col">
+                        <input type="text" value="{{row.6}}" name="sizeunit" class="form-control"
+                            placeholder="Size Unit">
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col">
+                        <input type="text" value="{{row.7}}" name="weight" class="form-control" placeholder="weight">
+                    </div>
+
+                    <div class="col">
+                        <input type="text" value="{{row.8}}" name="weightunit" class="form-control"
+                            placeholder="Weight Unit">
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col">
+                        <input type="text" value="{{row.9}}" name="color" class="form-control" placeholder="color">
+                    </div>
+
+                    <div class="col">
+                        <input type="text" value="{{row.10}}" name="price" class="form-control" placeholder="Price">
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col">
+                        <input type="text" name="stock" value="0" class="form-control" placeholder="Stock">
+                    </div>
+
+                    <div class="col btnstyle" style="flex-direction: row;">
+                        &nbsp; <img src="/static/{{row.12}}" id="pic" width="50">
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col btnstyle">
+                        <button type="submit" name="btn" value="Edit" class="btn btn-primary"
+                            style="width: 100%;">Edit</button>
+                    </div>
+
+                    <div class="col btnstyle">
+                        <button type="submit" name="btn" value="Delete" class="btn btn-primary w-100">Delete</button>
+                    </div>
+                </div>
+
+                <div class="row gap">
+                    <div class="col btnstyle" style="font-size: 18px; font-weight:bold;">
+                        {{msg}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
