@@ -9,7 +9,7 @@ import os
 def FinalProductInterface(request):
     try:
         result=request.session['ADMIN']
-        return render(request,"FinalProductInterface.html")
+        return render(request,"FinalProductInterface.html",{'result':result})
     except Exception as e:
         return render(request, "AdminLogin.html")
 
@@ -87,7 +87,8 @@ def DisplayAllFinalProduct(request):
         cmd.execute(q)
         rows = cmd.fetchall()
         dbe.close()
-        return render(request, "DisplayAllFinalProduct.html", {'rows': rows})
+        result = request.session['ADMIN']
+        return render(request, "DisplayAllFinalProduct.html", {'rows': rows,'result':result})
     except Exception as e:
         print(e)
         return render(request, "DisplayAllFinalProduct.html", {'rows': []})
@@ -141,6 +142,8 @@ def EditDeleteFinalProductRecord(request):
             dbe, cmd = Pool.ConnectionPool()
             q = "delete from finalproducts where finalproductid={}".format(finalproductid)
             cmd.execute(q)
+            p = "update finalproducts set finalproductid=finalproductid-1 where finalproductid>{}".format(finalproductid)
+            cmd.execute(p)
             dbe.commit()
             row = cmd.fetchone()
             dbe.close()
@@ -206,7 +209,8 @@ def DisplayFinalProductEmployee(request):
         cmd.execute(q)
         rows = cmd.fetchall()
         dbe.close()
-        return render(request, "DisplayFinalProductEmployee.html", {'rows': rows})
+        result = request.session['EMPLOYEE']
+        return render(request, "DisplayFinalProductEmployee.html", {'rows': rows,'result':result})
     except Exception as e:
         print(e)
         return render(request, "DisplayFinalProductEmployee.html", {'rows': []})

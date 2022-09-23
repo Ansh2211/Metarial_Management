@@ -49,7 +49,8 @@ def DisplayAllPurchaseProduct(request):
         cmd.execute(q)
         rows = cmd.fetchall()
         dbe.close()
-        return render(request, "DisplayAllPurchaseProduct.html", {'rows': rows})
+        result = request.session['EMPLOYEE']
+        return render(request, "DisplayAllPurchaseProduct.html", {'rows': rows,'result':result})
     except Exception as e:
         print(e)
         return render(request, "DisplayAllPurchaseProduct.html", {'rows': []})
@@ -84,9 +85,10 @@ def EditDeletePurchaseProductRecord(request):
     elif(btn == "Delete"):
         try:
             dbe, cmd = Pool.ConnectionPool()
-            q = "delete from purchase where transactionid={}".format(
-                transactionid)
+            q = "delete from purchase where transactionid={}".format(transactionid)
             cmd.execute(q)
+            p = "update purchase set transactionid=transactionid-1 where transactionid>{}".format(transactionid)
+            cmd.execute(p)
             dbe.commit()
             row = cmd.fetchone()
             dbe.close()

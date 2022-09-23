@@ -7,7 +7,7 @@
       padding:20px;
       }
     .myframe{
-      width:600px;
+      width:700px;
       background-color:#fff;
       padding:20px;
       border-radius:25px;
@@ -25,7 +25,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <title>Add Product</title>
+    <title>Attendance</title>
     <link rel="stylesheet" href="/static/dashboard/css/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -81,7 +81,7 @@
           </a>
         </li>
         <li>
-          <a href="/productinterface" class="active">
+          <a href="/productinterface">
             <i class='bx bx-shopping-bag' ></i>
             <span class="links_name">Add Product</span>
           </a>
@@ -117,7 +117,7 @@
           </a>
         </li>
         <li>
-          <a href="/viewattendance">
+          <a href="/viewattendance" class="active">
             <i class='bx bx-list-check' ></i>
             <span class="links_name">View Attendance</span>
           </a>
@@ -131,11 +131,11 @@
       </ul>
   </div>
   <section class="home-section">
-      {% csrf_token %}
+    {% csrf_token %}
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">List of Employees</span>
+        <span class="dashboard">View Attendance</span>
       </div>
       <div class="search-box">
         <input type="text" placeholder="Search here...">
@@ -150,104 +150,58 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title">Add Product</h4>
+              <h4 class="card-title">Attendance</h4>
               <p class="card-category">Material Management</p>
             </div>
             <div class="card-body">
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/static/javascript/project.js"></script>
-<script src="/static/javascript/subcategory.js"></script>
-
-<head>
+                <head>
     <meta charset="UTF-8">
-    <title>Material Management [Add Products]</title>
+    <title>Material Management</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+  <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/Javascript/project.js"></script>
 </head>
+<body>
 
-<body style="background-color: #dfe6e9;">
-<form action="/productsubmit" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-    <div class="root">
-        <div class="myframe">
-            <div class="row"
-                style="display: flex; align-items:center; font-size:14px; letter-spacing:2px; font-weight:bold; padding-left : 20px; margin-bottom: 10px;">
-                <img src="/static/product.png" width="30" style="padding-right: 5px;">
-                Add Products
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <select id="categoryid" name="categoryid" class="form-control">
-                        <option>-Select Category-</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row gap">
-                <div class="col">
-                    <select id="subcategoryid" name="subcategoryid" class="form-control">
-                        <option>-Select Sub Category-</option>
-                        </select>
-                </div>
-            </div>
-
-            <div class="row gap">
-                <div class="col">
-                    <input type="text" name="productname" class="form-control" placeholder="Product Name">
-                </div>
-                </div>
-
-                <div class="row gap">
-                <div class="col">
-                    <input type="text" name="description" class="form-control" placeholder="Description">
-                </div>
-            </div>
-
-            <div class="row gap">
-                <div class="col">
-                    <input type="text" name="gst" class="form-control" placeholder="GST">
-                </div>
-                </div>
-
-                <div class="row gap">
-                <div class="col btnstyle" style="flex-direction: row;">
-                    <input type="file" id="picture" accept="image/*" name="picture" class="form-control" placeholder="Picture">
-                    &nbsp; <img src="/static/noimage.png" id="pic" width="50">
-                </div>
-            </div>
-
-            <div class="row gap">
-                <div class="col btnstyle" >
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Save</button>
-                </div>
-
-                <div class="col btnstyle">
-                    <button type="reset" class="btn btn-primary w-100" >Reset</button>
-                </div>
-            </div>
-
-            <div class="row gap">
-                {% ifequal msg "Record Successfully Submitted" %}
-                <div class="col btnstyle" style="font-size: 18px; font-weight:bold; color: green;" >
-                    {{msg}}
-                </div>
-                {% endifequal %}
-
-                {% ifequal msg "Fail to Submit Record" %}
-                <div class="col btnstyle" style="font-size: 18px; font-weight:bold; color: red;" >
-                    {{msg}}
-                </div>
-                {% endifequal %}
-            </div>
-        </div>
-    </div>
-</form>
+<div class="root">
+ <div class="myframe">
+     <div class="row" style="display:flex;align-items:center;font-size:14px;letter-spacing:1px;font-weight:bold;padding-left:20px;margin-bottom:10px;">
+         <img src="/static/customer.png" width="30">
+         View Attendance
+     </div>
+   <table class="table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Employee ID</th>
+      <th>Employee Name</th>
+      <th>Date</th>
+      <th>In-Time</th>
+      <th>Out-Time</th>
+      <th>Total Working Hours</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+ {% for row in rows %}
+    <tr>
+      <th scope="row">{{ row.0 }}</th>
+      <td>{{ row.1 }}</td>
+      <td>{{ row.2 }}</td>
+      <td>{{ row.3 }}</td>
+      <td>{{ row.4 }}</td>
+      <td>{{ row.5 }}</td>
+      <td>{{ row.6 }}</td>
+      <td>{{ row.7 }}</td>
+    </tr>
+ {% endfor %}
+  </tbody>
+  </div>
+</div>
 </body>
 
-</html>
 
             </div>
           </div>

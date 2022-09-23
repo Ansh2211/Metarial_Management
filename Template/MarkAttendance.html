@@ -25,7 +25,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <title>List Suppliers</title>
+    <title>Mark Attendance</title>
     <link rel="stylesheet" href="/static/dashboard/css/style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -39,91 +39,61 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="/admindashboard">
+          <a href="/employeedashboard">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="/EmployeeInterface">
+          <a href="/displayproductemployee">
             <i class='bx bx-user-plus' ></i>
-            <span class="links_name">Register Employee</span>
+            <span class="links_name">List Product</span>
           </a>
         </li>
         <li>
-          <a href="/displayall">
+          <a href="/displayfinalproductemployee">
             <i class='bx bx-user' ></i>
-            <span class="links_name">List of Employees</span>
+            <span class="links_name">List Final Products</span>
           </a>
         </li>
         <li>
-          <a href="/categoryinterface">
+          <a href="/purchaseinterface">
             <i class='bx bx-category' ></i>
-            <span class="links_name">Add Category</span>
+            <span class="links_name">Purchase</span>
           </a>
         </li>
         <li>
-          <a href="/displayallcategory">
+          <a href="/displayallpurchaseproduct">
             <i class='bx bx-category' ></i>
-            <span class="links_name">List of Categories</span>
+            <span class="links_name">List of Purchase</span>
           </a>
         </li>
         <li>
-          <a href="/subcategoryinterface">
+          <a href="/issueinterface">
             <i class='bx bx-category-alt' ></i>
-            <span class="links_name">Add Sub Category</span>
+            <span class="links_name">Issue</span>
           </a>
         </li>
         <li>
-          <a href="/displayallsubcategory">
-            <i class='bx bx-category-alt' ></i>
-            <span class="links_name">List of Sub Categories</span>
-          </a>
-        </li>
-        <li>
-          <a href="/productinterface">
+          <a href="/displayallissueproduct">
             <i class='bx bx-shopping-bag' ></i>
-            <span class="links_name">Add Product</span>
+            <span class="links_name">List of Issue</span>
           </a>
         </li>
         <li>
-          <a href="/displayallproduct">
-            <i class='bx bx-shopping-bag' ></i>
-            <span class="links_name">List of Products</span>
-          </a>
-        </li>
-        <li>
-          <a href="/finalproductinterface">
+          <a href="/attendance" class="active">
             <i class='bx bx-layer-plus' ></i>
-            <span class="links_name">Add Final Product</span>
+            <span class="links_name">Mark Attendance</span>
           </a>
         </li>
         <li>
-          <a href="/displayallfinalproduct">
+          <a href="/leave">
             <i class='bx bx-layer-plus' ></i>
-            <span class="links_name">List of Final Products</span>
+            <span class="links_name">Mark Leave</span>
           </a>
         </li>
         <li>
-          <a href="/supplierinterface">
-            <i class='bx bx-user-check' ></i>
-            <span class="links_name">Add Supplier</span>
-          </a>
-        </li>
-        <li>
-          <a href="/displayallsupplier" class="active">
-            <i class='bx bx-user-check' ></i>
-            <span class="links_name">List of Suppliers</span>
-          </a>
-        </li>
-        <li>
-          <a href="/viewattendance">
-            <i class='bx bx-list-check' ></i>
-            <span class="links_name">View Attendance</span>
-          </a>
-        </li>
-        <li>
-          <a href="/adminlogout">
+          <a href="/employeelogout">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
@@ -131,18 +101,18 @@
       </ul>
   </div>
   <section class="home-section">
-    {% csrf_token %}
+      {% csrf_token %}
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">List of Suppliers</span>
+        <span class="dashboard">Mark Attendance</span>
       </div>
       <div class="search-box">
         <input type="text" placeholder="Search here...">
         <i class='bx bx-search' ></i>
       </div>
       <div class="profile-details">
-        <span class="admin_name">{{ result.adminname }}</span>
+        <span class="admin_name">{{ result.firstname}} {{ result.lastname }}</span>
       </div>
     </nav>
 
@@ -150,48 +120,60 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-header card-header-primary">
-              <h4 class="card-title">List Suppliers</h4>
+              <h4 class="card-title">Mark Attendance</h4>
               <p class="card-category">Material Management</p>
             </div>
             <div class="card-body">
                 <head>
     <meta charset="UTF-8">
-    <title>Material Management</title>
+    <title>Material Management[Attendance]</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/static/Javascript/date.js"></script>
 </head>
-<body>
-
+<body style="background:#dfe6e9;">
+<form action="/markattendance" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <input type="hidden" value="{{ row.0 }}" name="empid">
 <div class="root">
  <div class="myframe">
      <div class="row" style="display:flex;align-items:center;font-size:14px;letter-spacing:1px;font-weight:bold;padding-left:20px;margin-bottom:10px;">
          <img src="/static/customer.png" width="30">
-         List of Suppliers
+         MARK YOUR ATTENDING TIME
      </div>
-   <table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Contact<br>Details</th>
-    </tr>
-  </thead>
-  <tbody>
- {% for row in rows %}
-    <tr>
-      <th scope="row">{{ row.0 }}</th>
-      <td>{{ row.1 }} {{ row.2 }}</td>
-      <td>{{ row.3 }}<br>
-          {{ row.8 }},{{ row.9 }}
-      </td>
-      <td>{{ row.7 }}</td>
-    </tr>
- {% endfor %}
-  </tbody>
-  </div>
-</div>
+    <div class="row">
+        <div class="col">
+            <p>Employee ID:</p>
+            <input type="text" readonly="True" id="employeeid" name="employeeid" value="{{ result.employeeid }}" class="form-control" placeholder="Employee ID">
+        </div>
+    </div>
+    <div class="row gap">
+        <div class="col">
+            <p>Name:</p>
+            <input type="text" readonly="True" value="{{ result.firstname }} {{ result.lastname }}" id="fullname" name="fullname" class="form-control" placeholder="First Name">
+        </div>
+        <div class="col">
+            <p>Date:</p>
+            <input type="text" readonly="True" id="currentdate" name="currentdate" class="form-control" placeholder="Date">
+        </div>
+    </div>
+    <div class="row gap">
+        <div class="col">
+            <p>Attending-Time:</p>
+            <input type="text" readonly="True" id='intime' name="intime" class="form-control" placeholder="Time">
+        </div>
+        <div class="col btnstyle">
+            <button type="submit" id="btnsubmit" class="btn btn-primary" style="width: 100%; margin-top:35px;">Save</button>
+        </div>
+    </div>
+   <div class="row gap">
+         <div class="col btnstyle" style="font-size:18px;font-weight:bold;">
+             {{ msg }}
+         </div>
+     </div>
+</form>
 </body>
+</html>
 
 
             </div>

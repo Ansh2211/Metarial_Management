@@ -1,0 +1,115 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(/static/background.jpg);
+    background-size: cover;
+    background-image:
+    background-position: center;
+    font-family: sans-serif;
+}
+.loginbox{
+    width: 420px;
+    height: 420px;
+    background: #0a5857;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    border-radius: 25px;
+    padding: 70px 30px;
+
+}
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% -50px);
+}
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 30px;
+}
+.loginbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.loginbox input
+{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.loginbox input[type="text"], input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    border-radius:25px;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 10px;
+}
+.loginbox input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #081D45;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.loginbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+}
+.loginbox a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkgrey;
+}
+.loginbox a:hover
+{
+    color: #ffc107;
+}
+.button{
+    padding: 0;
+    margin: 0;
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    top: 50px;
+    left: 30px;
+    position: relative;
+    border: 5px solid #555;
+    border-radius: 25px;
+    transition-duration: .60s;
+}
+.button1{
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    background-image: url(/static/a.jpg);
+    background-size: cover;
+
+}
+.button1:hover{
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+}
+.button2{
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    background-image: url(/static/e.jpg);
+    background-size: cover;
+}
+.button2:hover{
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+}

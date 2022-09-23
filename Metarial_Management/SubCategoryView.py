@@ -8,7 +8,7 @@ import os
 def SubCategoryInterface(request):
     try:
         result=request.session['ADMIN']
-        return render(request,'SubCategoryInterface.html')
+        return render(request,'SubCategoryInterface.html',{'result':result})
 
     except Exception as e:
         return render(request, 'AdminLogin.html')
@@ -47,7 +47,8 @@ def DisplayAllSubCategory(request):
         cmd.execute(q)
         rows = cmd.fetchall()
         dbe.close()
-        return render(request, "DisplayAllSubCategory.html", {'rows': rows})
+        result = request.session['ADMIN']
+        return render(request, "DisplayAllSubCategory.html", {'rows': rows,'result':result})
     except Exception as e:
         print(e)
         return render(request, "DisplayAllSubCategory.html", {'rows': []})
@@ -91,6 +92,8 @@ def EditDeleteSubCategoryRecord(request):
             dbe, cmd = Pool.ConnectionPool()
             q = "delete from subcategory where subcategoryid = {}".format(subcategoryid)
             cmd.execute(q)
+            p = "update subcategory set subcategoryid=subcategoryid-1 where subcategoryid>{}".format(subcategoryid)
+            cmd.execute(p)
             dbe.commit()
             row = cmd.fetchone()
             dbe.close()

@@ -46,7 +46,8 @@ def DisplayAllIssueProduct(request):
         cmd.execute(q)
         rows = cmd.fetchall()
         dbe.close()
-        return render(request, "DisplayAllIssueProduct.html", {'rows': rows})
+        result = request.session['EMPLOYEE']
+        return render(request, "DisplayAllIssueProduct.html", {'rows': rows,'result':result})
     except Exception as e:
         print(e)
         return render(request, "DisplayAllIssueProduct.html", {'rows': []})
@@ -82,6 +83,8 @@ def EditDeleteIssueProductRecord(request):
             dbe, cmd = Pool.ConnectionPool()
             q = "delete from issue where issueid={}".format(issueid)
             cmd.execute(q)
+            p = "update issue set issueid=issueid-1 where issueid>{}".format(issueid)
+            cmd.execute(p)
             dbe.commit()
             row = cmd.fetchone()
             dbe.close()

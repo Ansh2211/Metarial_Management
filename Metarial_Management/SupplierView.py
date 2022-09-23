@@ -6,7 +6,7 @@ from . import PoolDict
 def SupplierInterface(request):
     try:
         result=request.session['ADMIN']
-        return render(request,'SupplierInterface.html')
+        return render(request,'SupplierInterface.html',{'result':result})
 
     except Exception as e:
         return render(request, 'AdminLogin.html')
@@ -42,7 +42,7 @@ def DisplayAllSupplier(request):
         rows=cmd.fetchall()
         db.close()
         result = request.session['ADMIN']
-        return render(request, 'DisplayAllSupplier.html', {'rows':rows})
+        return render(request, 'DisplayAllSupplier.html', {'rows':rows,'result':result})
 
     except Exception as e:
         return render(request, 'AdminLogin.html', {'rows': []})

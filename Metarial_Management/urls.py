@@ -25,9 +25,11 @@ from . import FinalProductView
 from . import SupplierView
 from . import PurchaseView
 from . import IssueView
+from . import AttendanceView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',AdminView.Index),
     path('adminlogin/',AdminView.AdminLogin),
     path('checkadminlogin',AdminView.CheckAdminLogin),
     path('admindashboard/',AdminView.AdminDashboard),
@@ -35,7 +37,8 @@ urlpatterns = [
 
     #ForEmployees
     path('employeelogin/',EmployeeView.EmployeeLogin),
-    path('checkemployeelogin/',EmployeeView.CheckEmployeeLogin),
+    path('checkemployeelogin',EmployeeView.CheckEmployeeLogin),
+    path('employeedashboard/',EmployeeView.EmployeeDashboard),
     path('employeelogout/',EmployeeView.EmployeeLogout),
     path('EmployeeInterface/',EmployeeView.EmployeeInterface),
     path('employeesubmit',EmployeeView.EmployeeSubmit),
@@ -111,6 +114,13 @@ urlpatterns = [
     path('editdeleteissueproductrecord/', IssueView.EditDeleteIssueProductRecord),
     path('displayissuealljson/', IssueView.DisplayIssueAllJSON),
     path('listissueemployee/',IssueView.ListIssueEmployee),
+
+    # For Attendance
+    path('attendance/', AttendanceView.Attend),
+    path('markattendance', AttendanceView.AttendSubmit),
+    path('leave/', AttendanceView.Leave),
+    path('markleave', AttendanceView.LeaveSubmit),
+    path('viewattendance/', AttendanceView.ShowAttendance),
 
     path('fetchallstates/',StateCityView.FetchAllStates),
     path('fetchallcities/',StateCityView.FetchAllCities)

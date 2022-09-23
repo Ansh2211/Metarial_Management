@@ -8,7 +8,7 @@ import os
 def CategoryInterface(request):
     try:
         result = request.session['ADMIN']
-        return render(request, 'CategoryInterface.html')
+        return render(request, 'CategoryInterface.html',{'result':result})
 
     except Exception as e:
         return render(request, "AdminLogin.html")
@@ -44,7 +44,8 @@ def DisplayAllCategory(request):
         cmd.execute(q)
         rows = cmd.fetchall()
         dbe.close()
-        return render(request, "DisplayAllCategory.html", {'rows': rows})
+        result = request.session['ADMIN']
+        return render(request, "DisplayAllCategory.html", {'rows': rows,'result':result})
     except Exception as e:
         print(e)
         return render(request, "DisplayAllCategory.html", {'rows': []})
@@ -86,6 +87,8 @@ def EditDeleteCategoryRecord(request):
             dbe, cmd = Pool.ConnectionPool()
             q = "delete from categories where categoryid = {}".format(categoryid)
             cmd.execute(q)
+            p = "update categories set categoryid=categoryid-1 where categoryid>{}".format(categoryid)
+            cmd.execute(p)
             dbe.commit()
             row = cmd.fetchone()
             dbe.close()
@@ -136,6 +139,7 @@ def GetCategoryJSON(request):
         q = "select * from categories"
         cmd.execute(q)
         rows = cmd.fetchall()
+        print(rows)
         dbe.close()
         return JsonResponse(rows, safe=False)
     except Exception as e:

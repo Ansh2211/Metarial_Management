@@ -19,8 +19,8 @@ def EmployeeLogin(request):
 @xframe_options_exempt
 def CheckEmployeeLogin(request):
     try:
-        email = request.GET['email']
-        password = request.GET['password']
+        email = request.POST['email']
+        password = request.POST['password']
         db, cmd = PoolDict.ConnectionPool()
         q = "select * from employee where email='{}' and password='{}'".format(email, password)
         cmd.execute(q)
@@ -28,7 +28,34 @@ def CheckEmployeeLogin(request):
         print(result)
         if(result):
             request.session['EMPLOYEE']=result
-            return render(request, 'EmployeeDashboard.html', {'result': result})
+            #Total Products
+            db, cmd = PoolDict.ConnectionPool()
+            p = "select count(*) as n from products"
+            cmd.execute(p)
+            r1 = cmd.fetchone()
+            #Total Purchases
+            s = "select count(*) as n from finalproducts"
+            cmd.execute(s)
+            r2 = cmd.fetchone()
+            #Total Issue
+            t = "select count(*) as n from purchase"
+            cmd.execute(t)
+            r3 = cmd.fetchone()
+            #Total Issues
+            u = "select count(*) as n from issue"
+            cmd.execute(u)
+            r4 = cmd.fetchone()
+            # Purchases
+            db, cmd = Pool.ConnectionPool()
+            pr = "select PP.*,(select C.categoryname from categories C where C.categoryid = PP.categoryid),(select S.subcategoryname from subcategory S where S.subcategoryid = PP.subcategoryid), (select P.productname from products P where P.productid = PP.productid), (select FP.finalproductname from finalproducts FP where FP.finalproductid = PP.finalproductid), (select S.firstname from suppliers S where S.supplierid = PP.supplierid) from purchase PP"
+            cmd.execute(pr)
+            rows = cmd.fetchall()
+            # Issues
+            ir = "select IP.*,(select C.categoryname from categories C where C.categoryid = IP.categoryid),(select S.subcategoryname from subcategory S where S.subcategoryid = IP.subcategoryid), (select P.productname from products P where P.productid = IP.productid), (select FP.finalproductname from finalproducts FP where FP.finalproductid = IP.finalproductid) from issue IP"
+            cmd.execute(ir)
+            irows = cmd.fetchall()
+            print(irows)
+            return render(request, 'EmployeeDashboard.html',{'result': result, 'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'rows': rows, 'irows': irows})
         else:
             return render(request, 'EmployeeLogin.html', {'result': result,'msg':'Invalid Email/Password'})
         db.close()
@@ -43,13 +70,41 @@ def EmployeeLogout(request):
 
 @xframe_options_exempt
 def EmployeeDashboard(request):
-  return render(request,"EmployeeDashboard.html")
+    result= request.session['EMPLOYEE']
+    # Total Products
+    db, cmd = PoolDict.ConnectionPool()
+    p = "select count(*) as n from products"
+    cmd.execute(p)
+    r1 = cmd.fetchone()
+    # Total Purchases
+    s = "select count(*) as n from finalproducts"
+    cmd.execute(s)
+    r2 = cmd.fetchone()
+    # Total Issue
+    t = "select count(*) as n from purchase"
+    cmd.execute(t)
+    r3 = cmd.fetchone()
+    # Total Issues
+    u = "select count(*) as n from issue"
+    cmd.execute(u)
+    r4 = cmd.fetchone()
+    # Purchases
+    db, cmd = Pool.ConnectionPool()
+    pr = "select PP.*,(select C.categoryname from categories C where C.categoryid = PP.categoryid),(select S.subcategoryname from subcategory S where S.subcategoryid = PP.subcategoryid), (select P.productname from products P where P.productid = PP.productid), (select FP.finalproductname from finalproducts FP where FP.finalproductid = PP.finalproductid), (select S.firstname from suppliers S where S.supplierid = PP.supplierid) from purchase PP"
+    cmd.execute(pr)
+    rows = cmd.fetchall()
+    # Issues
+    ir = "select IP.*,(select C.categoryname from categories C where C.categoryid = IP.categoryid),(select S.subcategoryname from subcategory S where S.subcategoryid = IP.subcategoryid), (select P.productname from products P where P.productid = IP.productid), (select FP.finalproductname from finalproducts FP where FP.finalproductid = IP.finalproductid) from issue IP"
+    cmd.execute(ir)
+    irows = cmd.fetchall()
+    print(irows)
+    return render(request, 'EmployeeDashboard.html',{'result': result, 'r1': r1, 'r2': r2, 'r3': r3, 'r4': r4, 'rows': rows, 'irows': irows})
 
 @xframe_options_exempt
 def EmployeeInterface(request):
     try:
         result=request.session['ADMIN']
-        return render(request,'EmployeeInterface.html')
+        return render(request,'EmployeeInterface.html',{'result': result})
 
     except Exception as e:
         return render(request, 'AdminLogin.html')
@@ -86,7 +141,7 @@ def EmployeeSubmit(request):
 
         #EmailService.SendMail(emailaddress,"Hi {} Your Login Password for Material Management is {} ".format(firstname,password))
 
-        EmailService.SendHTMLMail(emailaddress,"Hi {} Your Login Password for Material Management is {} ".format(firstname,password))
+        #EmailService.SendHTMLMail(emailaddress,"Hi {} Your Login Password for Material Management is {} ".format(firstname,password))
         #print(result.json())
         return render(request, 'EmployeeInterface.html',{'msg':'Record Submitted Successfully'})
 
@@ -104,7 +159,7 @@ def DisplayAll(request):
         rows=cmd.fetchall()
         db.close()
         result = request.session['ADMIN']
-        return render(request, 'DisplayAllEmployee.html', {'rows':rows})
+        return render(request, 'DisplayAllEmployee.html', {'result':result,'rows':rows})
 
     except Exception as e:
         return render(request, 'AdminLogin.html', {'rows': []})
@@ -155,6 +210,8 @@ def EditDeleteRecord(request):
             db, cmd = Pool.ConnectionPool()
             q = "delete from employee where employeeid={}".format(empid)
             cmd.execute(q)
+            p = "update employee set employeeid=employeeid-1 where employeeid>{}".format(empid)
+            cmd.execute(p)
             db.commit()
             db.close()
             return DisplayAll(request)
